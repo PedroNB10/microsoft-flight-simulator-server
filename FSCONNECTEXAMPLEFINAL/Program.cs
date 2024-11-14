@@ -61,11 +61,13 @@ namespace FlightSimulatorHttpServer
                             var planeData = new
                             {
                                 latestPlaneData.Value.Title,
-                                Latitude = latestPlaneData.Value.PlaneLatitude,
-                                Longitude = latestPlaneData.Value.PlaneLongitude,
-                                Altitude = latestPlaneData.Value.PlaneAltitude,
-                                Heading = latestPlaneData.Value.PlaneHeadingDegreesTrue,
-                                Airspeed = latestPlaneData.Value.AirspeedTrueInKnot
+                                latestPlaneData.Value.PlaneLatitude,
+                                latestPlaneData.Value.PlaneLongitude,
+                                latestPlaneData.Value.PlaneAltitude,
+                                latestPlaneData.Value.PlaneHeadingDegreesMagnetic,
+                                latestPlaneData.Value.AirspeedTrueRaw,
+                                latestPlaneData.Value.VerticalSpeed
+
                             };
 
                             responseString = JsonConvert.SerializeObject(planeData);
@@ -80,7 +82,8 @@ namespace FlightSimulatorHttpServer
                                 Longitude = 0.0,
                                 Altitude = 0.0,
                                 Heading = 0.0,
-                                Airspeed = 0.0
+                                Airspeed = 0.0,
+                                VerticalSpeed = 0.0 
                             };
 
                             responseString = JsonConvert.SerializeObject(planeData);
@@ -189,10 +192,12 @@ namespace FlightSimulatorHttpServer
             public double PlaneLongitude;
             [SimVar(UnitId = FsUnit.Feet)]
             public double PlaneAltitude;
-            [SimVar(UnitId = FsUnit.Degree)]
-            public double PlaneHeadingDegreesTrue;
-            [SimVar(NameId = FsSimVar.AirspeedTrue, UnitId = FsUnit.Knot)]
-            public double AirspeedTrueInKnot;
+            [SimVar(NameId = FsSimVar.PlaneHeadingDegreesMagnetic, UnitId = FsUnit.Degree)]
+            public double PlaneHeadingDegreesMagnetic;
+            [SimVar(NameId = FsSimVar.AirspeedTrueRaw, UnitId = FsUnit.Knot)]
+            public double AirspeedTrueRaw;
+            [SimVar(NameId = FsSimVar.VerticalSpeed, UnitId = FsUnit.FeetPerMinute)]
+            public double VerticalSpeed;
         }
 
         public enum Requests
