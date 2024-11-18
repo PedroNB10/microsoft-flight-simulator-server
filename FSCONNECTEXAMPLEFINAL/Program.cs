@@ -65,10 +65,11 @@ namespace FlightSimulatorHttpServer
                                 latestPlaneData.Value.PlaneLongitude,
                                 latestPlaneData.Value.PlaneAltitude,
                                 latestPlaneData.Value.PlaneHeadingDegreesMagnetic,
-                                latestPlaneData.Value.AirspeedTrueRaw,
-                                latestPlaneData.Value.VerticalSpeed
+                                latestPlaneData.Value.AirspeedTrue,
+                                latestPlaneData.Value.VerticalSpeed,
+                                timestamp = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss")
 
-                            };
+                        };
 
                             responseString = JsonConvert.SerializeObject(planeData);
                         }
@@ -194,8 +195,8 @@ namespace FlightSimulatorHttpServer
             public double PlaneAltitude;
             [SimVar(NameId = FsSimVar.PlaneHeadingDegreesMagnetic, UnitId = FsUnit.Degree)]
             public double PlaneHeadingDegreesMagnetic;
-            [SimVar(NameId = FsSimVar.AirspeedTrueRaw, UnitId = FsUnit.Knot)]
-            public double AirspeedTrueRaw;
+            [SimVar(NameId = FsSimVar.AirspeedTrue, UnitId = FsUnit.Knot)]
+            public double AirspeedTrue;
             [SimVar(NameId = FsSimVar.VerticalSpeed, UnitId = FsUnit.FeetPerMinute)]
             public double VerticalSpeed;
         }
